@@ -28,7 +28,7 @@
       <img class="img-fluid img-thumbnail" src="{{ url ('public/images/logo-aefi.jpg')}}" alt="">
   </div>
     <div class="card-body">
-      <p class="login-box-msg">Iniciar Sesión -</p>
+      <p class="login-box-msg">Iniciar Sesión</p>
 
       @include('_message')
 

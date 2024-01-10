@@ -5,6 +5,16 @@
     </div> 
 @endif
 
+
+@if(!empty(session('success'))) 
+    <!-- Mensaje de éxito -->
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div> 
+@endif
+
+
+
 @if(!empty(session('payment-error'))) 
     <!-- Mensaje de error de pago-->
     <div class="alert alert-danger" role="alert">

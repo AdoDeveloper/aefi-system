@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AEFI - Login</title>
+  <title>AEFI - Recuperar contraseña</title>
   <link rel="icon" href="{{url('public/images/logo-uso.ico')}}" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,11 +28,11 @@
       <img class="img-fluid img-thumbnail" src="{{ url ('public/images/logo-aefi.jpg')}}" alt="">
   </div>
     <div class="card-body">
-      <p class="login-box-msg">Iniciar Sesión</p>
+      <p class="login-box-msg">Recuperar contraseña</p>
 
       @include('_message')
 
-      <form action="{{ url('login')}}" method="post">
+      <form action="" method="post">
         {{ csrf_field()}}
         <div class="input-group mb-3">
           <input type="email" class="form-control" required name="email" placeholder="Correo institucional">
@@ -42,28 +42,14 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" required name="password" placeholder="Contraseña">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
+        
         <div class="row">
+          
+          
           <div class="col-6">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember" name="remember">
-              <label for="remember">
-                Recuerdame
-              </label>
-            </div>
+            <button type="submit" class="btn btn-primary btn-block">Recuperar</button>
           </div>
-          <!-- /.col -->
-          <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block">Iniciar</button>
-          </div>
-          <!-- /.col -->
+          
         </div>
       </form>
 
@@ -79,7 +65,7 @@
 
       <div class="row pt-2">
           <p class="col-9">
-            <a href="{{url('forgot-password')}}">Olvidé mi contraseña</a>
+            <a href="{{url('')}}">Iniciar Sesión</a>
           </p> 
           <p class="col-3">
             <a href="{{url('register.html')}}">Registrate</a>

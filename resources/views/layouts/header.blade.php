@@ -115,7 +115,7 @@
 
   <div class="user-panel d-flex pr-2">
     <div class="info text-uppercase d-none d-md-block">
-      <a href="#" class="d-block">{{Auth::user()->name}}</a>
+      <a href="#" class="d-block">{{Auth::user()->name}} {{Auth::user()->last_name}}</a>
     </div>
     <div class="image">
       <img src="{{url('public/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">

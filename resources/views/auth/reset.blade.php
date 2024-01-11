@@ -53,12 +53,14 @@
         </div>
         
         <div class="row">
-          
-          
-          <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block">Cambiar</button>
-          </div>
-          
+                   
+            <div class="col-6">
+              <button type="submit" class="btn btn-primary btn-block">Confirmar</button>
+            </div> 
+            <div class="col-6">
+              <a href="{{url('')}}" type="button" class="btn btn-secondary btn-block">Iniciar Sesión</a>
+            </div>
+   
         </div>
       </form>
 
@@ -71,15 +73,6 @@
         </a>
       </div> -->
       <!-- /.social-auth-links -->
-
-      <div class="row pt-2">
-          <p class="col-9">
-            <a href="{{url('')}}">Iniciar Sesión</a>
-          </p> 
-          <p class="col-3">
-            <a href="{{url('register.html')}}">Registrate</a>
-          </p>
-      </div>
      
     </div>
     <!-- /.card-body -->

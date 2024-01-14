@@ -103,13 +103,12 @@ class AdminController extends Controller
             $user->user_photo = $imageName;
         }
 
-        $user->updated_at = date("Y-m-d H:i:s");
+        $user->updated_at = now();
 
         // **Guardar el usuario actualizado**
         $user->save();
 
         return redirect("admin/admin/list")->with("welcomeMessage", "Administrador modificado correctamente.");
     }
-
 
 }

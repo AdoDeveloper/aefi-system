@@ -113,14 +113,15 @@
     </li>-->
   </ul>
 
-  <div class="user-panel d-flex pr-2">
+<div class="user-panel d-flex pr-2">
     <div class="info text-uppercase d-none d-md-block">
-      <a href="#" class="d-block">{{Auth::user()->name}} {{Auth::user()->last_name}}</a>
+        <a href="#" class="d-block">{{Auth::user()->name}} {{Auth::user()->last_name}}</a>
     </div>
     <div class="image">
-      <img src="{{url('public/user-profile/' . Auth::user()->user_photo)}}" class="img-circle elevation-2" alt="User Image">
+        <img src="{{url('public/user-profile/' . Auth::user()->user_photo)}}" class="img-circle elevation-2 rounded-circle" alt="User Image" style="object-fit: cover;">
     </div>
-  </div>  
+</div>
+  
 
 </nav>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

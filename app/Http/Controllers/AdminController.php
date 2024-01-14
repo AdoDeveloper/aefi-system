@@ -21,19 +21,55 @@ class AdminController extends Controller
         return view("admin.admin.add", $data);
     }
 
-    public function insert(Request $request){
-        
-       $user = new User();
-       $user->name = trim($request->name);
-       $user->last_name = trim($request->last_name);
-       $user->email = trim($request->email);
-       $user->password = Hash::make($request->password);
-       $user->user_type = 1;
-       $user->save();
-
-       return redirect("admin/admin/list")->with("welcomeMessage","Administrador creado correctamente.");
-       
-    }
+    public function insert(Request $request)
+    {
+        // **Adición de validaciones para los campos 'name', 'last_name', 'email', 'password', 'password_confirmation' y 'user_photo'**
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'required|string|confirmed',
+            'user_photo' => 'nullable|file|image|max:2048'
+        ]);
+    
+        // Verificar si el correo electrónico ya está registrado en la base de datos
+        if (User::where('email', $request->email)->exists()) {
+            return redirect()->back()->with("errorMessage", "El correo electrónico ya está registrado en el sistema. Por favor, utiliza otro correo electrónico.");
+        }
+    
+        $user = new User();
+        $user->name = trim($request->name);
+        $user->last_name = trim($request->last_name);
+        $user->email = trim($request->email);
+        $user->password = Hash::make($request->password);
+        $user->user_type = 1;
+    
+        // **Agregar la lógica para manejar la foto del usuario**
+    
+        if ($request->hasFile('user_photo')) {
+            $imageFile = $request->file('user_photo');
+    
+            // Obtener la fecha y hora actuales para agregar al nombre del archivo
+            $currentDateTime = now()->format('YmdHis');
+    
+            // Construir el nombre de la imagen con la fecha y hora
+            $imageName = $user->name . '_' . $currentDateTime . '.' . $imageFile->getClientOriginalExtension();
+    
+            // Almacenar la imagen en el directorio 'public/user-profile'
+            $imageFile->storeAs('user-profile', $imageName, 'public');
+    
+            // Asignar el nombre de la imagen al campo 'user_photo'
+            $user->user_photo = $imageName;
+        } else {
+            // Si no se proporciona una imagen, asignar un valor predeterminado
+            $user->user_photo = 'default.jpg';
+        }
+    
+        // **Guardar el nuevo usuario**
+        $user->save();
+    
+        return redirect("admin/admin/list")->with("welcomeMessage", "Administrador creado correctamente.");
+    }    
 
 
     public function edit($id){
@@ -64,6 +100,15 @@ class AdminController extends Controller
         // Actualización de campos de nombre, apellido y correo
         $user->name = trim($request->name);
         $user->last_name = trim($request->last_name);
+                
+       // Verificar si ya existe el correo en la base de datos
+        if ($request->email === $user->email) {
+        // En caso de coincidencia, se actualiza a la nueva contraseña
+        $user->email = Hash::make($request->new_password);
+        } else {
+        // En caso de que la confirmación de la contraseña no coincida
+          return redirect()->back()->with("errorMessage", "El correo electrónico ya está registrado en el sistema. Por favor, utiliza otro correo electrónico.");
+        } 
         $user->email = trim($request->email);
 
         // Verificar si se proporcionó una nueva contraseña
@@ -119,8 +164,7 @@ class AdminController extends Controller
         $user->save();
  
         return redirect("admin/admin/list")->with("welcomeMessage","Administrador eliminado correctamente.");
-       
- 
+
      }
 
 }

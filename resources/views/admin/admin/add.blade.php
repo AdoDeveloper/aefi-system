@@ -25,7 +25,7 @@
               <div class="card-header">
                 <h3 class="card-title"></h3>
               </div>
-              <form method="post" action="">
+              <form method="post" action="" enctype="multipart/form-data">
                   {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
@@ -37,16 +37,16 @@
                     <input type="text" class="form-control" name="last_name" required placeholder="Introduzca los nombre">
                   </div>
                   <div class="form-group">
-                    <label>Correo Institucional</label>
+                    <label>Correo</label>
                     <input type="email" class="form-control"  name="email" required placeholder="introduzca el correo">
                   </div>
                   <div class="form-group">
                     <label>Contraseña</label>
-                    <input type="password" class="form-control" name="password" required placeholder="Introduzca la contrasena">
+                    <input type="password" class="form-control" name="password" placeholder="Introduzca la contrasena">
                   </div>
                   <div class="form-group">
                     <label>Confirmar Contraseña</label>
-                    <input type="password" class="form-control" name="password_confirmation" required placeholder="Confirmar la contrasena">
+                    <input type="password" class="form-control" name="password_confirmation" placeholder="Confirmar la contrasena">
                   </div>
                   <div class="form-group">
                     <input type="file" class="form-control" name="user_photo" accept="image/*" placeholder="Foto de perfil">

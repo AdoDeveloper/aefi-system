@@ -10,6 +10,7 @@ use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 
 class AuthController extends Controller
@@ -74,50 +75,79 @@ class AuthController extends Controller
 
 
    public function registerUser(Request $request)
-   {
-       $validator = Validator::make($request->all(), [
-           'nombre' => ['required', 'string', 'max:255'],
-           'last_name' => ['required', 'string', 'max:255'],
-           'email' => ['required', 'email', 'unique:users,email', 'max:250'],
-           'password' => ['required', 'min:8', 'confirmed'],
-           'user_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'], // Permitir nulo para user_photo
-       ]);
-   
-       if ($validator->fails()) {
-           // Redirigir de vuelta con mensajes de error y datos de entrada
-           return redirect()->back()->withErrors($validator)->withInput();
-       }
-   
-       try {
-           // Guardar Usuario
-           $user = User::create([
-               'name' => $request->nombre, // Actualizar a $request->nombre
-               'last_name' => $request->last_name,
-               'email' => $request->email,
-               'password' => Hash::make($request->password),
-               'user_photo' => null, // Valor predeterminado si no se proporciona ningún archivo
-           ]);
-   
-           // Guardar la ruta de la foto del usuario si se proporciona
-           if ($request->hasFile('user_photo')) {
-               $imagePath = $request->file('user_photo')->store('user_photos', 'public');
-               $user->update(['user_photo' => $imagePath]);
-           }
-   
-           // Autenticar al usuario
-           Auth::login($user);
-           $request->session()->regenerate();
-   
-           // Redirigir a la página de inicio de sesión o al panel de control según tu lógica.
-           return redirect()->route('login');
-       } catch (\Exception $e) {
-           // Manejar el error (por ejemplo, redirigir de vuelta con un mensaje de error)
-           return redirect()->back()->with('error', 'Ha ocurrido un error al crear la cuenta. Detalles del error: ' . $e->getMessage());
-       }
-   }
-   
+{
+    $validator = Validator::make($request->all(), [
+        'name' => ['required', 'string', 'max:255'],
+        'last_name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', Rule::unique('users')->ignore($request->user()), 'max:250'],
+        'password' => [
+            'required',
+            'min:8',
+            'confirmed',
+            function ($attribute, $value, $fail) {
+                // Verificar si la contraseña cumple con los requisitos deseados
+                if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$._@$!%*#?&])[A-Za-z\d$._@$!%*#?&]{8,}$/', $value)) {
+                    $fail('La contraseña debe contener al menos una letra, un número y uno de los siguientes caracteres especiales: $._@$!%*#?&');
+                }
+            },
+        ],
+        'user_photo' => ['nullable', 'image', 'max:2048'],
+    ]);
+    
+    if ($validator->fails()) {
+        // Redirigir de vuelta con mensajes de error y datos de entrada
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    try {
+        $user = User::create([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_photo' => null
+        ]);        
+    
+        // Guardar la ruta de la foto del usuario si se proporciona
+        if ($request->hasFile('user_photo')) {
+            $imageFile = $request->file('user_photo');
+
+            // Obtener la fecha y hora actuales para agregar al nombre del archivo
+            $currentDateTime = now()->format('YmdHis');
+
+            // Construir el nombre de la imagen con la fecha y hora
+            $imageName = $request->name . '_' . $currentDateTime . '.jpg';
+
+            // Almacenar la imagen en el directorio 'public/user-profile'
+            $imageFile->storeAs('user-profile', $imageName, 'public');
+
+            // Actualizar el campo 'user_photo' en la base de datos con el nombre de la imagen
+            $user->update(['user_photo' => $imageName]);
+        } else {
+            $user->update(['user_photo' => 'default.jpg']);
+        }
 
 
+        // Autenticar al usuario
+        if (Auth::login($user)) {
+            // Redirigir al dashboard según el tipo de usuario
+            switch ($user->user_type) {
+            
+                case 3:
+                dd(session('success'));
+                return redirect('student/dashboard')->with('success', 'Cuenta creada con éxito. ¡Bienvenido , ' . $request->name . '!');                
+                default:
+                    return redirect(url(''))->with('success', 'Cuenta creada con éxito, inicia sesión con tus credenciales.');
+            }
+        }
+
+        return redirect(url(''))->with('error', 'Error al autenticar al usuario. Inténtalo de nuevo.');
+
+    } catch (\Exception $e) {
+        // Manejar el error (por ejemplo, redirigir de vuelta con un mensaje de error)
+        return redirect()->back()->with('error', 'Ha ocurrido un error al crear la cuenta. Detalles del error: ' . $e->getMessage());
+    }
+    }
 
     public function forgotpassword()
     {

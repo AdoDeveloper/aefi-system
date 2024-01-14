@@ -26,11 +26,7 @@ Route::get('/', [AuthController::class,'login']);
 
 Route::post('login', [AuthController::class,'AuthLogin']);
 
-Route::get('signup', function () {
-    return view('auth.register');
-});
-
-Route::get('/formulario-registro', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('signup', function () { return view('auth.register');});
 
 Route::post('/register', [AuthController::class, 'registerUser'])->name('register.user');
 

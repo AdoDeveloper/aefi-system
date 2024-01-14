@@ -31,16 +31,11 @@
 
       @include('_message')
       
-      <form method="POST" action="{{ route('register.user') }}">
-        @csrf
-        <!-- {{ csrf_field() }} -->
+      <form method="POST" action="{{ route('register.user') }}" enctype="multipart/form-data">
+        {{ csrf_field() }}
     
         <div class="input-group mb-3">
             <input type="text" class="form-control" required name="name" placeholder="Nombres">
-            {{-- Si hay un error tendremos el mensaje --}}
-            @if ($errors->has('name'))
-            {{ $errors->first('name') }}
-            @endif
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -59,9 +54,6 @@
     
         <div class="input-group mb-3">
             <input type="email" class="form-control" required name="email" placeholder="Correo institucional">
-            @if ($errors->has('email'))
-            {{ $errors->first('email') }}
-            @endif
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope"></span>
@@ -71,9 +63,6 @@
     
         <div class="input-group mb-3">
             <input type="password" class="form-control" required name="password" placeholder="Contraseña">
-            @if ($errors->has('password'))
-            {{ $errors->first('password') }}
-            @endif
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock"></span>

@@ -5,7 +5,6 @@
     </div> 
 @endif
 
-
 @if(!empty(session('success'))) 
     <!-- Mensaje de éxito -->
     <div class="alert alert-success" role="alert">
@@ -13,7 +12,12 @@
     </div> 
 @endif
 
-
+@if ($errors->any())
+    <!-- Mensajes de error generales -->
+    <div class="alert alert-warning" role="alert">
+        {{ $errors->first() }}
+    </div>
+@endif
 
 @if(!empty(session('payment-error'))) 
     <!-- Mensaje de error de pago-->

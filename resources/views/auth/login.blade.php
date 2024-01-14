@@ -82,7 +82,7 @@
             <a href="{{url('forgot-password')}}">Olvidé mi contraseña</a>
           </p> 
           <p class="col-3">
-            <a href="{{url('register.html')}}">Registrate</a>
+            <a href="{{ url('signup') }}">Registrate</a>
           </p>
       </div>
      

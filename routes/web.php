@@ -24,6 +24,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class,'login']);
 
 Route::post('login', [AuthController::class,'AuthLogin']);
+
+Route::get('signup', function () {
+    return view('auth.register');
+});
+
+Route::get('/formulario-registro', [AuthController::class, 'showRegisterForm'])->name('register');
+
+Route::post('/register', [AuthController::class, 'registerUser'])->name('register.user');
+
 Route::get('logout', [AuthController::class,'logout']);
 Route::get('forgot-password', [AuthController::class, 'forgotpassword']);
 Route::post('forgot-password', [AuthController::class, 'PostForgotPassword']);
@@ -52,4 +61,6 @@ Route::group(['middleware' => 'student'], function(){
 Route::group(['middleware' => 'parent'], function(){
     Route::get('parent/dashboard', [DashboardController::class,'dashboard']);
 });
+
+
     

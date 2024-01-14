@@ -41,7 +41,7 @@
                   </div>
                   <div class="form-group">
                     <label>Contraseña Actual</label>
-                    <input type="password" class="form-control" name="current_password" placeholder="Introduzca la contraseña actual" required>
+                    <input type="password" class="form-control" name="current_password" placeholder="Introduzca la contraseña actual">
                   </div>
                   <div class="form-group">
                     <label>Nueva Contraseña</label>

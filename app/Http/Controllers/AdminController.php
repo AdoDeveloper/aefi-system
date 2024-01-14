@@ -70,14 +70,22 @@ class AdminController extends Controller
         if (!empty($request->new_password)) {
             // Verificar la contraseña actual
             if (Hash::check($request->current_password, $user->password)) {
-                // Hash y guardar la nueva contraseña
-                $user->password = Hash::make($request->new_password);
+                
+                // Verificar si la confirmación de la contraseña coincide
+                if ($request->new_password === $request->new_password_confirmation) {
+                    // En caso de coincidencia, se actualiza a la nueva contraseña
+                    $user->password = Hash::make($request->new_password);
+                } else {
+                    // En caso de que la confirmación de la contraseña no coincida
+                    return redirect()->back()->with("errorMessage", "Las contraseñas a confirmar no coinciden.");
+                }
+                
             } else {
                 return redirect()->back()->with("errorMessage", "La contraseña actual no es válida.");
             }
         }
 
-        // **Actualización de la ruta de la foto del usuario**
+        // **Actualización de la foto del usuario**
 
         if ($request->hasFile('user_photo')) {
             $imageFile = $request->file('user_photo');
@@ -94,6 +102,8 @@ class AdminController extends Controller
             // Actualizar el campo 'user_photo' en el modelo
             $user->user_photo = $imageName;
         }
+
+        $user->updated_at = date("Y-m-d H:i:s");
 
         // **Guardar el usuario actualizado**
         $user->save();

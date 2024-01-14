@@ -1,10 +1,13 @@
-<footer class="main-footer">
-    <strong>Copyright &copy; <?php echo date("Y"); ?> <a href="">AEFI</a>.</strong>
-    Todos los derechos reservados - UNIVERSIDAD DE SONSONATE
-    <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.0.0
-    </div>
+<footer class="main-footer text-center">
+  <div class="mb-3">
+      <strong>Copyright &copy; <?php echo date("Y"); ?> <a href="">AEFI</a>.</strong>
+      Todos los derechos reservados - UNIVERSIDAD DE SONSONATE
+  </div>
+  <div class="float-none">
+      <b>Version</b> 1.0.0
+  </div>
 </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

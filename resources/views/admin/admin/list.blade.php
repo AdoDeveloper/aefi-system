@@ -14,7 +14,7 @@
 
 
           <div class="col-sm-6" style="text-align: right;">
-            <a href="{{url('admin/admin/add')}}" class="btn btn-primary">Agregar nuevo Admin</a>
+            <a href="{{url('admin/admin/add')}}" class="btn btn-primary">Agregar Admin</a>
           </div>
 
           
@@ -43,8 +43,9 @@
                       <th>Nombre</th>
                       <th>Apellido</th>
                       <th>Correo</th>
-                      <th>Create Date</th>
-                      <th>Action</th>
+                      <th>Creado</th>
+                      <th>Actualizado</th>
+                      <th>Accion</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -55,6 +56,7 @@
                        <td>{{ $value->last_name}}</td>
                        <td>{{ $value->email}}</td>
                        <td>{{ $value->created_at}}</td>
+                       <td>{{ $value->updated_at}}</td>
                        <td>
                         <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary">Modificar</a>
                         <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger">Eliminar</a>
@@ -70,15 +72,6 @@
           </div>
           <!-- /.col -->
         </div>
-        <!-- /.row -->
-
-        <!-- /.row -->
-    
-        <!-- /.row -->
-   
-        <!-- /.row -->
-      
-        <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

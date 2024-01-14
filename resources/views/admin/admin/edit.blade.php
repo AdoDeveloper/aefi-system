@@ -14,7 +14,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -25,7 +24,7 @@
               <div class="card-header">
                 <h3 class="card-title"></h3>
               </div>
-              <form method="post" action="">
+              <form method="post" action="" enctype="multipart/form-data">
                   {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
@@ -37,13 +36,24 @@
                     <input type="text" class="form-control" name="last_name" value="{{ $getRecord->last_name }}" required placeholder="Introduzca los nombre">
                   </div>
                   <div class="form-group">
-                    <label>Correo Institucional</label>
+                    <label>Correo</label>
                     <input type="email" class="form-control"  name="email" value="{{ $getRecord->email }}" required placeholder="introduzca el correo">
                   </div>
                   <div class="form-group">
-                    <label>Contrasena</label>
-                    <input type="password" class="form-control" name="password"  required placeholder="Introduzca la contrasena">
-                    <p>Quieres cambiar tu contrasena? por favor agrega tu nueva contrasena.</p>
+                    <label>Contraseña Actual</label>
+                    <input type="password" class="form-control" name="current_password" placeholder="Introduzca la contraseña actual" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="new_password" placeholder="Introduzca la nueva contraseña">
+                  </div>
+                  <div class="form-group">
+                    <label>Confirmar Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="new_password_confirmation" placeholder="Confirme la nueva contraseña">
+                  </div>
+                  <div class="form-group">
+                    <label>Foto de perfil</label>
+                    <input type="file" class="form-control" name="user_photo" accept="image/*" placeholder="Foto de perfil">
                   </div>
                   <!--<div class="form-group">
                     <label for="exampleInputFile">File input</label>
@@ -66,6 +76,7 @@
 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Actualizar</button>
+                  <a href="{{ url('admin/admin/list')}}" class="btn btn-secondary">Regresar</a>
                 </div>
               </form>
             </div>

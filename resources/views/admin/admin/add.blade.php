@@ -41,8 +41,15 @@
                     <input type="email" class="form-control"  name="email" required placeholder="introduzca el correo">
                   </div>
                   <div class="form-group">
-                    <label>Contrasena</label>
+                    <label>Contraseña</label>
                     <input type="password" class="form-control" name="password" required placeholder="Introduzca la contrasena">
+                  </div>
+                  <div class="form-group">
+                    <label>Confirmar Contraseña</label>
+                    <input type="password" class="form-control" name="password_confirmation" required placeholder="Confirmar la contrasena">
+                  </div>
+                  <div class="form-group">
+                    <input type="file" class="form-control" name="user_photo" accept="image/*" placeholder="Foto de perfil">
                   </div>
                   <!--<div class="form-group">
                     <label for="exampleInputFile">File input</label>
@@ -64,7 +71,8 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Agregar</button>
+                  <a href="{{ url('admin/admin/list')}}" class="btn btn-secondary">Regresar</a>
                 </div>
               </form>
             </div>

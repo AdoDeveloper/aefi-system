@@ -81,3 +81,24 @@
     }, 3000);
 </script>
 @endif
+
+@if(session('errorMessage'))
+
+  <div id="errorMessage" class="text-center d-flex align-items-center">
+    <div class="alert alert-danger text-white mx-auto w-75 w-md-50 w-lg-25 my-3" style="z-index: 9999;">
+      <span class="ml-3">{{ session('errorMessage') }}</span>
+      <button type="button" class="close px-3" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+
+{{-- Borrar el mensaje de bienvenida después de 5 segundos --}}
+<script>
+    setTimeout(function() {
+        $('#errorMessage').fadeOut('slow', function() {
+            $(this).remove();
+        });
+    }, 3000);
+</script>
+@endif

@@ -28,11 +28,6 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-md-12">
-         
-            @include('_message')
-         
-
-     
             <!-- /.card -->
 
             <div class="card">
@@ -53,7 +48,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                     @foreach($getRecord as $value);
+                     @foreach($getRecord as $value)
                        <tr>
                        <td>{{ $value->id}}</td>
                        <td>{{ $value->name}}</td>

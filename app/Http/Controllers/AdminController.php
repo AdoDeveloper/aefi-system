@@ -111,4 +111,16 @@ class AdminController extends Controller
         return redirect("admin/admin/list")->with("welcomeMessage", "Administrador modificado correctamente.");
     }
 
+
+
+    public function delete($id){
+        $user = User::getSingle($id);
+        $user->is_delete = 1;
+        $user->save();
+ 
+        return redirect("admin/admin/list")->with("welcomeMessage","Administrador eliminado correctamente.");
+       
+ 
+     }
+
 }

@@ -8,21 +8,17 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Administradores (Totales : {{ $getRecord->total() }})</h1>
+          <div class="col-md-6">
+            <h1 class="display-4">Administradores <span class="badge bg-secondary">Totales: {{ $getRecord->total() }}</span></h1>
           </div>
-
-
-          <div class="col-sm-6" style="text-align: right;">
+    
+          <div class="col-md-6 mt-2 mt-md-0 text-md-end" style="text-align: right;">
             <a href="{{url('admin/admin/add')}}" class="btn btn-primary">Agregar Admin</a>
           </div>
-
-          
         </div>
       </div><!-- /.container-fluid -->
-    </section>
-
-
+    </section>    
+    
     <!-- Main content -->
     <section class="content">
 

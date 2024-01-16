@@ -96,9 +96,9 @@
                             <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary btn-sm">
                               <i class="fas fa-edit m-1"></i> Modificar
                             </a>
-                            <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger btn-sm ml-1">
+                            <a href="#" class="btn btn-danger btn-sm ml-1" onclick="confirmDelete('{{ $value->id }}')">
                               <i class="fas fa-trash-alt m-1"></i> Eliminar
-                            </a>
+                            </a>                            
                           </div>
                         </td>
                       </tr>
@@ -125,4 +125,48 @@
   </div>
   <!-- /.content-wrapper -->
     
+  <script>
+    function confirmDelete(userId) {
+      // Crea un modal de Bootstrap para la ventana de confirmación
+      const modal = `
+        <div class="modal" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar este administrador?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="forceCloseModal()">Cancelar</button>
+                <a href="{{ url('admin/admin/delete') }}/${userId}" class="btn btn-danger">Eliminar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+  
+      // Agrega el modal al cuerpo del documento
+      document.body.insertAdjacentHTML('beforeend', modal);
+  
+      // Muestra el modal
+      const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'), {
+        backdrop: 'static'
+      });
+  
+      confirmDeleteModal.show();
+  
+      // Función para forzar el cierre del modal
+      window.forceCloseModal = function() {
+        confirmDeleteModal.hide();
+        confirmDeleteModal.dispose();
+        document.getElementById('confirmDeleteModal').remove();
+      };
+    }
+  </script>
+  
+  
+
 @endsection

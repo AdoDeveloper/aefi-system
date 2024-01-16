@@ -73,44 +73,50 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Correo</th>
-                      <th>Creado</th>
-                      <th>Actualizado</th>
-                      <th>Accion</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                     @foreach($getRecord as $value)
-                       <tr>
-                       <td>{{ $value->id}}</td>
-                       <td>{{ $value->name}}</td>
-                       <td>{{ $value->last_name}}</td>
-                       <td>{{ $value->email}}</td>
-                       <td>{{ $value->created_at}}</td>
-                       <td>{{ $value->updated_at}}</td>
-                       <td>
-                        <!--<a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary">Modificar</a>
-                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger">Eliminar</a>-->
-                        <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary"> <i class="fas fa-edit m-1"></i>Modificar</a>
-                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger ml-1"> <i class="fas fa-trash-alt m-1"></i>Eliminar</a>
-                       </td>
-                       </tr>
-                     @endforeach
-                  </tbody>
-                </table>
-               <div style="padding: 10px; float: right;">
-                {!! $getRecord->appends(request()->except('page'))->links() !!}
-
-               </div>
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="d-sm-table-cell">ID</th>
+                        <th class="d-sm-table-cell">Nombre</th>
+                        <th class="d-sm-table-cell">Apellido</th>
+                        <th class="d-none d-sm-table-cell">Correo</th>
+                        <th class="d-none d-sm-table-cell">Creado</th>
+                        <th class="d-none d-sm-table-cell">Actualizado</th>
+                        <th class="d-sm-table-cell">Accion</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($getRecord as $value)
+                      <tr>
+                        <td class="d-sm-table-cell">{{ $value->id}}</td>
+                        <td class="d-sm-table-cell">{{ $value->name}}</td>
+                        <td class="d-sm-table-cell">{{ $value->last_name}}</td>
+                        <td class="d-none d-sm-table-cell">{{ $value->email}}</td>
+                        <td class="d-none d-sm-table-cell">{{ $value->created_at}}</td>
+                        <td class="d-none d-sm-table-cell">{{ $value->updated_at}}</td>
+                        <td class="d-sm-table-cell">
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary btn-sm">
+                              <i class="fas fa-edit m-1"></i> Modificar
+                            </a>
+                            <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger btn-sm ml-md-1 mt-1 mt-md-0">
+                              <i class="fas fa-trash-alt m-1"></i> Eliminar
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-end mt-3">
+                  {!! $getRecord->appends(request()->except('page'))->links() !!}
+                </div>
               </div>
               <!-- /.card-body -->
-           </div>
+            </div>                     
+            
             <!-- /.card -->
           </div>
           <!-- /.col -->

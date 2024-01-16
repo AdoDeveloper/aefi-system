@@ -98,7 +98,7 @@
                         <!--<a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary">Modificar</a>
                         <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger">Eliminar</a>-->
                         <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary"> <i class="fas fa-edit m-1"></i>Modificar</a>
-                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger"> <i class="fas fa-trash-alt m-1"></i>Eliminar</a>
+                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger ml-1"> <i class="fas fa-trash-alt m-1"></i>Eliminar</a>
                        </td>
                        </tr>
                      @endforeach

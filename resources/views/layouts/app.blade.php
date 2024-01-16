@@ -6,6 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{!empty($header_title) ? $header_title : ''}} - AEFI</title>
   <link rel="icon" href="{{url('public/images/logo-uso.ico')}}" type="image/x-icon">
+
+  <style>
+    /* Estilo personalizado para la barra de desplazamiento */
+    body::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #8b99a7;
+      border-radius: 6px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+
+    body {
+      scrollbar-width: thin;
+      scrollbar-color: #007bff #f1f1f1;
+    }
+  </style>
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->

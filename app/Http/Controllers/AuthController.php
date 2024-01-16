@@ -79,7 +79,22 @@ class AuthController extends Controller
     $validator = Validator::make($request->all(), [
         'name' => ['required', 'string', 'max:255'],
         'last_name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'email', Rule::unique('users')->ignore($request->user()), 'max:250'],
+        'email' => [
+            'required',
+            'email',
+            Rule::unique('users')->ignore($request->user()),
+            'max:250',
+            function ($attribute, $value, $fail) {
+                // Verificar si el correo electrónico es de Gmail o del dominio usonsonate.edu.sv
+                if (
+                    !filter_var($value, FILTER_VALIDATE_EMAIL) || // Asegurarse de que sea una dirección de correo electrónico válida
+                    strpos($value, '@gmail.com') === false &&
+                    strpos($value, '@usonsonate.edu.sv') === false
+                ) {
+                    $fail('No se permiten correos temporales o con el dominio ingresado.');
+                }
+            },
+        ],
         'password' => [
             'required',
             'min:8',
@@ -91,9 +106,14 @@ class AuthController extends Controller
                 }
             },
         ],
-        'user_photo' => ['nullable', 'image', 'max:2048'],
+        'user_photo' => [
+            'nullable',
+            'image',
+            'max:2048',
+            'mimes:jpeg,png,jpg,webp,bmp', // Añadir los formatos permitidos (excluir gif y svg)
+        ],
     ]);
-    
+
     if ($validator->fails()) {
         // Redirigir de vuelta con mensajes de error y datos de entrada
         return redirect()->back()->withErrors($validator)->withInput();
@@ -132,10 +152,9 @@ class AuthController extends Controller
         if (Auth::login($user)) {
             // Redirigir al dashboard según el tipo de usuario
             switch ($user->user_type) {
-            
                 case 3:
-                dd(session('success'));
-                return redirect('student/dashboard')->with('success', 'Cuenta creada con éxito. ¡Bienvenido , ' . $request->name . '!');                
+                dd(session('welcomeMessage'));
+                return redirect('student/dashboard')->with('welcomeMessage', 'Cuenta creada con éxito. ¡Bienvenido , ' . $request->name . '!');                
                 default:
                     return redirect(url(''))->with('success', 'Cuenta creada con éxito, inicia sesión con tus credenciales.');
             }

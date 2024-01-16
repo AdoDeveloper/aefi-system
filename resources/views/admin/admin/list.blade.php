@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Admin List</h1>
+            <h1>Administradores (Totales : {{ $getRecord->total() }})</h1>
           </div>
 
 
@@ -22,12 +22,64 @@
       </div><!-- /.container-fluid -->
     </section>
 
+
     <!-- Main content -->
     <section class="content">
+
+    
       <div class="container-fluid">
         <div class="row">
           <!-- /.col -->
           <div class="col-md-12">
+
+
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"> Busqueda de Administradores</h3>
+              </div>
+              <form method="get" action="" enctype="multipart/form-data">
+                <div class="card-body">
+                  <div class="row">
+                   <div class="form-group col-md-3">
+                     <label>Nombres</label>
+                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Introduzca el nombre">
+                   </div>
+                   <div class="form-group col-md-3">
+                     <label>Apellidos</label>
+                     <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Introduzca los nombre">
+                   </div>
+                   <div class="form-group col-md-3">
+                     <label>Correo</label>
+                     <input type="text" class="form-control" value="{{ Request::get('email ') }}" name="email"  placeholder="introduzca el correo">
+                   </div>
+                  <!--  <div class="form-group col-md-3 d-flex align-items-end">
+                     <button class="btn btn-primary" type="submit" style="width: 30%;">Buscar</button>
+                     <div style="width: 10px;"></div>
+                     <a href="{{ url('admin/admin/list') }}" class="btn btn-success" style="width: 30%;">Limpiar</a>
+                   </div> -->
+
+                   <div class="form-group col-md-3 d-flex align-items-end">
+                       <button class="btn btn-primary" type="submit" style="width: 30%;">
+                         <i class="fas fa-search"></i> Buscar
+                        </button>
+                        <div style="width: 10px;"></div> <!-- Espacio entre los botones -->
+                        <a href="{{ url('admin/admin/list') }}" class="btn btn-success" style="width: 30%;">
+                          <i class="fas fa-eraser"></i> Limpiar
+                         </a>
+                   </div>
+
+
+                 </div>
+                 
+                </div>
+                            
+              </form>
+            </div>
+           
+
+        
+        
+
             <!-- /.card -->
 
             <div class="card">
@@ -58,16 +110,22 @@
                        <td>{{ $value->created_at}}</td>
                        <td>{{ $value->updated_at}}</td>
                        <td>
-                        <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary">Modificar</a>
-                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger">Eliminar</a>
+                        <!--<a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary">Modificar</a>
+                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger">Eliminar</a>-->
+                        <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i>Modificar</a>
+                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger"> <i class="fas fa-trash-alt"></i>Eliminar</a>
                        </td>
                        </tr>
                      @endforeach
                   </tbody>
                 </table>
+               <div style="padding: 10px; float: right;">
+                {!! $getRecord->appends(request()->except('page'))->links() !!}
+
+               </div>
               </div>
               <!-- /.card-body -->
-            </div>
+           </div>
             <!-- /.card -->
           </div>
           <!-- /.col -->

@@ -53,10 +53,10 @@
                     </div>
               
                     <div class="form-group col-md-3 d-flex justify-content-between align-items-end">
-                      <button class="btn btn-primary" type="submit" style="flex: 1;">
+                      <button class="btn btn-primary btn-sm" type="submit" style="flex: 1;">
                         <i class="fas fa-search m-1"></i> Buscar
                       </button>
-                      <a href="{{ url('admin/admin/list') }}" class="btn btn-success ml-2" style="flex: 1;">
+                      <a href="{{ url('admin/admin/list') }}" class="btn btn-success btn-sm ml-md-1 mt-1 mt-md-0 ml-1" style="flex: 1;">
                         <i class="fas fa-eraser m-1"></i> Limpiar
                       </a>
                     </div>
@@ -77,25 +77,25 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th class="d-sm-table-cell">ID</th>
-                        <th class="d-sm-table-cell">Nombre</th>
-                        <th class="d-sm-table-cell">Apellido</th>
-                        <th class="d-none d-sm-table-cell">Correo</th>
-                        <th class="d-none d-sm-table-cell">Creado</th>
-                        <th class="d-none d-sm-table-cell">Actualizado</th>
-                        <th class="d-sm-table-cell">Accion</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Creado</th>
+                        <th>Actualizado</th>
+                        <th>Accion</th>
                       </tr>
                     </thead>
                     <tbody>
                       @foreach($getRecord as $value)
                       <tr>
-                        <td class="d-sm-table-cell">{{ $value->id}}</td>
-                        <td class="d-sm-table-cell">{{ $value->name}}</td>
-                        <td class="d-sm-table-cell">{{ $value->last_name}}</td>
-                        <td class="d-none d-sm-table-cell">{{ $value->email}}</td>
-                        <td class="d-none d-sm-table-cell">{{ $value->created_at}}</td>
-                        <td class="d-none d-sm-table-cell">{{ $value->updated_at}}</td>
-                        <td class="d-sm-table-cell">
+                        <td>{{ $value->id}}</td>
+                        <td>{{ $value->name}}</td>
+                        <td>{{ $value->last_name}}</td>
+                        <td>{{ $value->email}}</td>
+                        <td>{{ $value->created_at}}</td>
+                        <td>{{ $value->updated_at}}</td>
+                        <td>
                           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary btn-sm">
                               <i class="fas fa-edit m-1"></i> Modificar
@@ -110,12 +110,12 @@
                     </tbody>
                   </table>
                 </div>
-                <div class="text-end mt-3">
+                <div style="padding: 10px; float: right;">
                   {!! $getRecord->appends(request()->except('page'))->links() !!}
                 </div>
               </div>
               <!-- /.card-body -->
-            </div>                     
+            </div>
             
             <!-- /.card -->
           </div>

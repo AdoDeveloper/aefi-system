@@ -32,7 +32,6 @@
           <!-- /.col -->
           <div class="col-md-12">
 
-
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title"> Busqueda de Administradores</h3>
@@ -40,46 +39,32 @@
               <form method="get" action="" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="row">
-                   <div class="form-group col-md-3">
-                     <label>Nombres</label>
-                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Introduzca el nombre">
-                   </div>
-                   <div class="form-group col-md-3">
-                     <label>Apellidos</label>
-                     <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name"  placeholder="Introduzca los nombre">
-                   </div>
-                   <div class="form-group col-md-3">
-                     <label>Correo</label>
-                     <input type="text" class="form-control" value="{{ Request::get('email ') }}" name="email"  placeholder="introduzca el correo">
-                   </div>
-                  <!--  <div class="form-group col-md-3 d-flex align-items-end">
-                     <button class="btn btn-primary" type="submit" style="width: 30%;">Buscar</button>
-                     <div style="width: 10px;"></div>
-                     <a href="{{ url('admin/admin/list') }}" class="btn btn-success" style="width: 30%;">Limpiar</a>
-                   </div> -->
-
-                   <div class="form-group col-md-3 d-flex align-items-end">
-                       <button class="btn btn-primary" type="submit" style="width: 30%;">
-                         <i class="fas fa-search"></i> Buscar
-                        </button>
-                        <div style="width: 10px;"></div> <!-- Espacio entre los botones -->
-                        <a href="{{ url('admin/admin/list') }}" class="btn btn-success" style="width: 30%;">
-                          <i class="fas fa-eraser"></i> Limpiar
-                         </a>
-                   </div>
-
-
-                 </div>
-                 
+                    <div class="form-group col-md-3">
+                      <label>Nombres</label>
+                      <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name" placeholder="Introduzca el nombre">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Apellidos</label>
+                      <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name" placeholder="Introduzca los apellidos">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label>Correo</label>
+                      <input type="text" class="form-control" value="{{ Request::get('email') }}" name="email" placeholder="Introduzca el correo">
+                    </div>
+              
+                    <div class="form-group col-md-3 d-flex justify-content-between align-items-end">
+                      <button class="btn btn-primary" type="submit" style="flex: 1;">
+                        <i class="fas fa-search m-1"></i> Buscar
+                      </button>
+                      <a href="{{ url('admin/admin/list') }}" class="btn btn-success ml-2" style="flex: 1;">
+                        <i class="fas fa-eraser m-1"></i> Limpiar
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                            
-              </form>
+              </form>              
             </div>
            
-
-        
-        
-
             <!-- /.card -->
 
             <div class="card">
@@ -112,8 +97,8 @@
                        <td>
                         <!--<a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary">Modificar</a>
                         <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger">Eliminar</a>-->
-                        <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary"> <i class="fas fa-edit"></i>Modificar</a>
-                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger"> <i class="fas fa-trash-alt"></i>Eliminar</a>
+                        <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary"> <i class="fas fa-edit m-1"></i>Modificar</a>
+                        <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger"> <i class="fas fa-trash-alt m-1"></i>Eliminar</a>
                        </td>
                        </tr>
                      @endforeach

@@ -95,12 +95,12 @@
                         <td>{{ $value->email}}</td>
                         <td>{{ $value->created_at}}</td>
                         <td>{{ $value->updated_at}}</td>
-                        <td>
-                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <td class="text-end">
+                          <div class="d-flex">
                             <a href="{{ url('admin/admin/edit/' .$value->id) }}" class="btn btn-primary btn-sm">
                               <i class="fas fa-edit m-1"></i> Modificar
                             </a>
-                            <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger btn-sm ml-md-1 mt-1 mt-md-0">
+                            <a href="{{ url('admin/admin/delete/' .$value->id) }}" class="btn btn-danger btn-sm ml-1">
                               <i class="fas fa-trash-alt m-1"></i> Eliminar
                             </a>
                           </div>
@@ -110,12 +110,14 @@
                     </tbody>
                   </table>
                 </div>
-                <div style="padding: 10px; float: right;">
+                <div class="text-end mt-3">
                   {!! $getRecord->appends(request()->except('page'))->links() !!}
                 </div>
               </div>
               <!-- /.card-body -->
             </div>
+            
+            
             
             <!-- /.card -->
           </div>

@@ -85,78 +85,68 @@ class AdminController extends Controller
     public function update($id, Request $request)
     {
         $user = User::getSingle($id);
-
+    
         if (empty($user)) {
             abort(404);
         }
-
-        // **Adición de validaciones para los campos 'name' y 'user_photo'**
-
+    
+        // Validación de los campos 'name' y 'user_photo'
         $request->validate([
             'name' => 'required|string|max:255',
             'user_photo' => 'nullable|file|image|max:2048'
         ]);
-
-        // Actualización de campos de nombre, apellido y correo
+    
+        // Verificación de la existencia del correo electrónico en la base de datos
+        $existingUser = User::where('email', $request->email)->first();
+    
+        if ($existingUser && $existingUser->id !== $user->id) {
+            return redirect()->back()->with("errorMessage", "El correo electrónico ya está registrado en el sistema. Por favor, utiliza otro correo electrónico.");
+        } else
+        {
+            $user->email = trim($request->email);
+        }
+    
+        // Actualización de campos de nombre, apellido
         $user->name = trim($request->name);
         $user->last_name = trim($request->last_name);
-                
-       // Verificar si ya existe el correo en la base de datos
-        if ($request->email === $user->email) {
-        // En caso de coincidencia, se actualiza a la nueva contraseña
-        $user->email = Hash::make($request->new_password);
-        } else {
-        // En caso de que la confirmación de la contraseña no coincida
-          return redirect()->back()->with("errorMessage", "El correo electrónico ya está registrado en el sistema. Por favor, utiliza otro correo electrónico.");
-        } 
-        $user->email = trim($request->email);
-
-        // Verificar si se proporcionó una nueva contraseña
+    
+        // Verificación de nueva contraseña
         if (!empty($request->new_password)) {
-            // Verificar la contraseña actual
             if (Hash::check($request->current_password, $user->password)) {
-                
-                // Verificar si la confirmación de la contraseña coincide
                 if ($request->new_password === $request->new_password_confirmation) {
-                    // En caso de coincidencia, se actualiza a la nueva contraseña
                     $user->password = Hash::make($request->new_password);
                 } else {
-                    // En caso de que la confirmación de la contraseña no coincida
                     return redirect()->back()->with("errorMessage", "Las contraseñas a confirmar no coinciden.");
                 }
-                
             } else {
                 return redirect()->back()->with("errorMessage", "La contraseña actual no es válida.");
             }
         }
-
-        // **Actualización de la foto del usuario**
-
+    
+        // Actualización de la foto del usuario
         if ($request->hasFile('user_photo')) {
             $imageFile = $request->file('user_photo');
-
+    
             // Obtener la fecha y hora actuales para agregar al nombre del archivo
             $currentDateTime = now()->format('YmdHis');
-
+    
             // Construir el nombre de la imagen con la fecha y hora
             $imageName = $user->name . '_' . $currentDateTime . '.' . $imageFile->getClientOriginalExtension();
-
+    
             // Almacenar la imagen en el directorio 'public/user-profile'
             $imageFile->storeAs('user-profile', $imageName, 'public');
-
+    
             // Actualizar el campo 'user_photo' en el modelo
             $user->user_photo = $imageName;
         }
-
+    
         $user->updated_at = now();
-
-        // **Guardar el usuario actualizado**
+    
+        // Guardar el usuario actualizado
         $user->save();
-
+    
         return redirect("admin/admin/list")->with("welcomeMessage", "Administrador modificado correctamente.");
-    }
-
-
+    }    
 
     public function delete($id){
         $user = User::getSingle($id);

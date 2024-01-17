@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class ClassController extends Controller
 {
     public function list(){
-       // $data['getRecord'] = User::getClass();
+       $data['getRecord'] = ClassModel::getRecord();
         $data["header_title" ] = "Class List";
         return view("admin.class.list", $data);
     }
@@ -41,6 +41,37 @@ class ClassController extends Controller
     
         return redirect("admin/class/list")->with("welcomeMessage", "Clase creada correctamente.");
     }   
+
+
+    public function edit($id){
+        $data['getRecord'] = ClassModel::getSingle($id);
+        if(!empty($data['getRecord'])){
+            $data['header_title'] = "Edit Class";
+            return view("admin.class.edit", $data);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function update($id, Request $request){
+        $save = ClassModel::getSingle($id);
+        $save->name = $request->name;
+        $save->status = $request->status;
+        $save->save();
+
+        return redirect("admin/class/list")->with("welcomeMessage", "Clase editada correctamente.");
+
+    }
+
+
+    public function delete($id){
+        $classModel = ClassModel::getSingle($id);
+        $classModel->is_delete = 1;
+        $classModel->save();
+ 
+        return redirect("admin/class/list")->with("welcomeMessage","Clase eliminado correctamente.");
+
+    }
 
 
 }

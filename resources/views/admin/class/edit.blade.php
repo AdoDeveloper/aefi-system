@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Agregar Nueva Clase</h1>
+            <h1>Editar Clase</h1>
           </div>
           
         </div>
@@ -30,13 +30,13 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label>Nombre de la Clase</label>
-                    <input type="text" class="form-control" name="name" required placeholder="Introduzca el nombre de la clase">
+                    <input type="text" class="form-control" value="{{ $getRecord->name }}" name="name" required placeholder="Introduzca el nombre de la clase">
                   </div>
                   <div class="form-group">
                     <label>Estado</label>
                     <select class="form-control" name="status">
-                        <option value="0">Activa</option>
-                        <option value="1">Inactiva</option>
+                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Activa</option>
+                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inactiva</option>
                     </select>
                    
                   </div>
@@ -61,7 +61,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Agregar</button>
+                  <button type="submit" class="btn btn-primary">Actualizar</button>
                   <a href="{{ url('admin/class/list')}}" class="btn btn-secondary">Regresar</a>
                 </div>
               </form>

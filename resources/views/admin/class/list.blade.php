@@ -40,9 +40,10 @@
                       <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name" placeholder="Introduzca el nombre">
                     </div>
                     <div class="form-group col-md-3">
-                      <label>Apellidos</label>
-                      <input type="text" class="form-control" value="{{ Request::get('last_name') }}" name="last_name" placeholder="Introduzca los apellidos">
+                     <label>Fecha de Creacion</label>
+                     <input type="date" class="form-control" value="{{ old('date', Request::get('date')) }}" name="date">
                     </div>
+
                     
               
                     <div class="form-group col-md-3 d-flex justify-content-between align-items-end">
@@ -80,11 +81,38 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+                        @foreach($getRecord as $value)
+                        <tr>
+                          <td>{{ $value->id}}</td>
+                          <td>{{ $value->name}}</td>
+                          <td>
+                            @if($value->status == 0)
+                             Activo
+                            @else
+                             Inactivo
+                            @endif 
+                          </td>
+                         <td>{{ $value->created_by_name}}</td>
+                         <td>{{ $value->created_at}}</td>
+                         <td>{{ $value->updated_at}}</td>
+                         <td class="text-end">
+                           <div class="d-flex">
+                             <a href="{{ url('admin/class/edit/' .$value->id) }}" class="btn btn-primary btn-sm">
+                               <i class="fas fa-edit m-1"></i> Modificar
+                             </a>
+                             <a href="#" class="btn btn-danger btn-sm ml-1" onclick="confirmDelete('{{ $value->id }}')">
+                               <i class="fas fa-trash-alt m-1"></i> Eliminar
+                             </a>                            
+                           </div>
+                         </td>
+                       </tr>
+                        @endforeach
                     </tbody>
                   </table>
                 </div>
                 <div class="text-end mt-3">
+
+                   {!! $getRecord->appends(request()->except('page'))->links() !!}
                   
                 </div>
               </div>
@@ -104,7 +132,7 @@
   <!-- /.content-wrapper -->
     
   <script>
-    function confirmDelete(userId) {
+    function confirmDelete(classId) {
       // Crea un modal de Bootstrap para la ventana de confirmación
       const modal = `
         <div class="modal" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
@@ -115,11 +143,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                ¿Estás seguro de que deseas eliminar este administrador?
+                ¿Estás seguro de que deseas eliminar esta clase?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="forceCloseModal()">Cancelar</button>
-                <a href="{{ url('admin/admin/delete') }}/${userId}" class="btn btn-danger">Eliminar</a>
+                <a href="{{ url('admin/class/delete') }}/${classId}" class="btn btn-danger">Eliminar</a>
               </div>
             </div>
           </div>

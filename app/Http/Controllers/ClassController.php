@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ClassModel;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class ClassController extends Controller
@@ -25,7 +23,7 @@ class ClassController extends Controller
 
     public function insert(Request $request)
     {
-        // **Adición de validaciones para los campos 'name', 'last_name', 'email', 'password', 'password_confirmation' y 'user_photo'**
+        // **Adición de validaciones para los campos 'name', 'status'**
         $request->validate([
             'name' => 'required|string|max:255',
             'status' => 'required|integer|in:0,1',

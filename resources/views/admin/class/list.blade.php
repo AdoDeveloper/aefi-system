@@ -44,7 +44,14 @@
                      <input type="date" class="form-control" value="{{ old('date', Request::get('date')) }}" name="date">
                     </div>
 
-                    
+                    <div class="form-group col-md-3">
+                      <label>Estado</label>
+                      <select class="form-control" name="status">
+                          <option value="null" @if(Request::missing('status')) selected @endif>Todos</option>
+                          <option value="0" @if(Request::get('status') === '0') selected @endif>Activo</option>
+                          <option value="1" @if(Request::get('status') === '1') selected @endif>Inactivo</option>
+                      </select>
+                    </div>                  
               
                     <div class="form-group col-md-3 d-flex justify-content-between align-items-end">
                       <button class="btn btn-primary btn-sm" type="submit" style="flex: 1;">

@@ -11,6 +11,11 @@
           <div class="col-md-6">
             <h1 class="display-4">Administradores <span class="badge bg-secondary">Totales: {{ $getRecord->total() }}</span></h1>
           </div>
+
+
+
+
+          
     
           <div class="col-md-6 mt-2 mt-md-0 text-md-end" style="text-align: right;">
             <a href="{{url('admin/admin/add')}}" class="btn btn-primary">Agregar Admin</a>

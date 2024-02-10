@@ -14,6 +14,10 @@
       background: rgb(29, 69, 131);
       background: linear-gradient(90deg, rgba(29, 69, 131, 1) 0%, rgba(46, 132, 60, 1) 100%);
     }
+    .login-box,
+    .card {
+      border-radius: 20px; /* Ajusta el radio según tus preferencias */
+    }
   </style>
 </head>
 <body class="hold-transition login-page $enable-gradients.aqua-gradient">

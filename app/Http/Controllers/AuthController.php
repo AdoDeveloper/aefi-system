@@ -12,6 +12,19 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+use Cloudinary\Cloudinary;
+// Use Composer to manage your PHP library dependency
+// require DIR . '/vendor/autoload.php';
+
+use Cloudinary\Configuration\Configuration;
+// Use the SearchApi class for searching assets
+use Cloudinary\Api\Search\SearchApi;
+// Use the AdminApi class for managing assets
+use Cloudinary\Api\Admin\AdminApi;
+// Use the UploadApi class for uploading assets
+use Cloudinary\Api\Upload\UploadApi;
+
+Configuration::instance('cloudinary://752128321289437:nrQ7Hp0MvkMLMeGWxydz4QWXyNA@dubdppkki?secure=true');
 
 class AuthController extends Controller
 {
@@ -128,23 +141,38 @@ class AuthController extends Controller
             'user_photo' => null
         ]);        
     
-        // Guardar la ruta de la foto del usuario si se proporciona
         if ($request->hasFile('user_photo')) {
             $imageFile = $request->file('user_photo');
-
-            // Obtener la fecha y hora actuales para agregar al nombre del archivo
-            $currentDateTime = now()->format('YmdHis');
-
-            // Construir el nombre de la imagen con la fecha y hora
-            $imageName = $request->name . '_' . $currentDateTime . '.jpg';
-
-            // Almacenar la imagen en el directorio 'public/user-profile'
-            $imageFile->storeAs('user-profile', $imageName, 'public');
-
-            // Actualizar el campo 'user_photo' en la base de datos con el nombre de la imagen
-            $user->update(['user_photo' => $imageName]);
-        } else {
-            $user->update(['user_photo' => 'default.jpg']);
+        
+            // Configuración de Cloudinary (reemplaza con tus propias credenciales)
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => 'dubdppkki',
+                    'api_key'    => '752128321289437',
+                    'api_secret' => 'nrQ7Hp0MvkMLMeGWxydz4QWXyNA',
+                ],
+                'url' => [
+                    'secure' => true,
+                ],
+            ]);
+        
+            // Crear una instancia de Cloudinary
+            $cloudinary = new Cloudinary();
+        
+            // Crear una instancia de UploadApi
+            $uploadApi = $cloudinary->uploadApi();
+        
+            // Subir la imagen a Cloudinary
+            $result = $uploadApi->upload($imageFile->getRealPath(), ['folder' => 'user-profile']);
+        
+            // Obtener la URL de la imagen subida
+            $imageUrl = $result['secure_url'];
+        
+            // Actualizar el campo 'user_photo' en la base de datos con la URL de la imagen en Cloudinary
+            $user->update(['user_photo' => $imageUrl]);
+        }
+         else {
+            $user->update(['user_photo' => 'https://res.cloudinary.com/dubdppkki/image/upload/v1709234706/user-profile/shh2inrxlfejbdxl3fcn.jpg']);
         }
 
 

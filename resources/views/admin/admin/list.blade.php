@@ -61,6 +61,14 @@
                         <i class="fas fa-eraser m-1"></i> Limpiar
                       </a>
                     </div>
+                    <div class="form-group col-md-3 d-flex justify-content-between align-items-end">
+                      <a href="{{ url('export') }}" class="btn btn-success btn-sm ml-md-1 mt-1 mt-md-0 ml-1" style="flex: 1;">
+                        <i class="fas fa-file-excel m-1"></i> Generar Excel
+                      </a>
+                      <a href="{{ url('admin/admin/list') }}"  class="btn btn-danger btn-sm ml-md-1 mt-1 mt-md-0 ml-1" style="flex: 1;">
+                       <i class="fas fa-file-pdf m-1"></i> Generar PDF
+                      </a>
+                    </div>
                   </div>
                 </div>
               </form>              

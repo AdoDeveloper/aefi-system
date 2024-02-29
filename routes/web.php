@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,6 +59,7 @@ Route::group (['middleware' => 'admin'], function(){
     Route::get('admin/class/edit/{id}', [ClassController::class,'edit']);
     Route::post('admin/class/edit/{id}', [ClassController::class,'update']);
     Route::get('admin/class/delete/{id}', [ClassController::class,'delete']);
+  
 });
 
 

@@ -17,7 +17,7 @@
     .login-box,
     .card {
       border-radius: 20px; /* Ajusta el radio según tus preferencias */
-    }
+    }  
   </style>
 </head>
 <body class="hold-transition login-page $enable-gradients.aqua-gradient">

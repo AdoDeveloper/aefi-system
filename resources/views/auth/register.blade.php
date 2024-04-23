@@ -8,14 +8,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="{{ url ('public/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
-  <!-- Bootstrap CSS (v4.6.0) -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- Your custom styles -->
-    <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ url ('public/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url ('public/dist/css/adminlte.min.css')}}">
   <style>
     body{
       background: rgb(29,69,131);
@@ -110,11 +107,11 @@
     </form>
 </div>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js" integrity="sha384-e3b0c351d02a2beebed5d14c406772b3d28c7f3a" crossorigin="anonymous"></script>
-  <!-- Bootstrap JS (v4.6.0) -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha384-vhq89TM+U6tb5Ac6pUarLuuU0d2dj5uwkSYO3+hJjo4tDOtYSo/h5+qDHf6u" crossorigin="anonymous"></script>
-  <!-- AdminLTE App -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+<!-- jQuery -->
+<script src="{{ url ('public/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url ('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url ('public/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>

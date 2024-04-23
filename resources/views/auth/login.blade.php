@@ -8,11 +8,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url ('public/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url ('public/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ url ('public/dist/css/adminlte.min.css')}}">
   <style>
     body{
       background: rgb(29,69,131);
@@ -29,7 +29,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
   <div class="card-header text-center">
-      <img class="img-fluid img-thumbnail" src="public/images/logo-aefi.jpg" alt="">
+      <img class="img-fluid img-thumbnail" src="{{ url ('public/images/logo-aefi.jpg')}}" alt="">
   </div>
     <div class="card-body">
       <p class="login-box-msg">Iniciar Sesión</p>
@@ -98,10 +98,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{ url ('public/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url ('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+<script src="{{ url ('public/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>

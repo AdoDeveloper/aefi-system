@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary">
   <!-- Brand Logo -->
   <a href="#" class="brand-link text-white pt-3 d-flex align-items-center">
-    <img src="{{url('public/images/logo-uso.svg')}}" alt="Logo" class="text-white pl-2" style="width: 3rem;">
+    <img src="{{url('images/logo-uso.svg')}}" alt="Logo" class="text-white pl-2" style="width: 3rem;">
     <span class="brand-text font-weight-bold" style="font-size: 2.5rem;">AEFI</span>
   </a>
 

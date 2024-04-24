@@ -36,7 +36,7 @@
 
       @include('_message')
 
-      <form action="{{ url('login') }}" method="post">
+      <form action="{{ secure_url('login') }}" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
           <input type="email" class="form-control" required name="email" placeholder="Correo institucional">

@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AEFI - Login</title>
-  <link rel="icon" href="{{url('images/logo-uso.ico')}}" type="image/x-icon">
+  <link rel="icon" href="{{ secure_asset('images/logo-uso.ico') }}" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ url ('plugins/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{ secure_asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="{{ url ('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{ secure_asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ url ('dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{ secure_asset('dist/css/adminlte.min.css') }}">
   <style>
     body{
       background: rgb(29,69,131);
@@ -29,15 +29,15 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
   <div class="card-header text-center">
-      <img class="img-fluid img-thumbnail" src="{{ url ('images/logo-aefi.jpg')}}" alt="">
+      <img class="img-fluid img-thumbnail" src="{{ secure_asset('images/logo-aefi.jpg') }}" alt="">
   </div>
     <div class="card-body">
       <p class="login-box-msg">Iniciar Sesión</p>
 
       @include('_message')
 
-      <form action="{{ url('login')}}" method="post">
-        {{ csrf_field()}}
+      <form action="{{ url('login') }}" method="post">
+        {{ csrf_field() }}
         <div class="input-group mb-3">
           <input type="email" class="form-control" required name="email" placeholder="Correo institucional">
           <div class="input-group-append">
@@ -59,7 +59,7 @@
             <div class="icheck-primary">
               <input type="checkbox" id="remember" name="remember">
               <label for="remember">
-                Recuerdame
+                Recuérdame
               </label>
             </div>
           </div>
@@ -71,22 +71,12 @@
         </div>
       </form>
 
-      <!--<div class="social-auth-links text-center mt-2 mb-3">
-        <a href="#" class="btn btn-block btn-primary">
-          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-      </div> -->
-      <!-- /.social-auth-links -->
-
       <div class="row pt-2">
           <p class="col-9">
-            <a href="{{url('forgot-password')}}">Olvidé mi contraseña</a>
+            <a href="{{ url('forgot-password') }}">Olvidé mi contraseña</a>
           </p> 
           <p class="col-3">
-            <a href="{{ url('signup') }}">Registrate</a>
+            <a href="{{ url('signup') }}">Regístrate</a>
           </p>
       </div>
      
@@ -98,10 +88,10 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="{{ url ('plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ secure_asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{ url ('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ secure_asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ url ('dist/js/adminlte.min.js')}}"></script>
+<script src="{{ secure_asset('dist/js/adminlte.min.js') }}"></script>
 </body>
 </html>

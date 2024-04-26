@@ -29,7 +29,7 @@
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <img class="img-fluid img-thumbnail" src="{{ url('public/images/logo-aefi.jpg') }}" alt="">
+      <img class="img-fluid img-thumbnail" src="{{ secure_asset('images/logo-aefi.jpg') }}" alt="">
       </div>
 
       <!-- Nota de recuperación de contraseña -->

@@ -49,6 +49,12 @@
             <p>Dashboard</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{url('student/Actividades')}}" class="nav-link  @if(Request::segment(2) == 'dashboard') active @endif">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Actividades</p>
+          </a>
+        </li>
         <!-- Otras secciones específicas para estudiantes -->
 
         @elseif(Auth::user()->user_type == 4)

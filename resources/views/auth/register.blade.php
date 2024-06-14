@@ -7,111 +7,104 @@
   <link rel="icon" href="{{ secure_asset('images/logo-uso.ico') }}" type="image/x-icon">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ secure_asset('plugins/fontawesome-free/css/all.min.css') }}">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="{{ secure_asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ secure_asset('dist/css/adminlte.min.css') }}">
-  <style>
-    body{
-      background: rgb(29,69,131);
-      background: linear-gradient(90deg, rgba(29,69,131,1) 0%, rgba(46,132,60,1) 100%);
-    }
+  <!-- Tailwind CSS -->
+  @vite('resources/css/app.css')
 
-    .login-box,
-    .card {
-      border-radius: 20px; /* Ajusta el radio según tus preferencias */
+  <style>
+    body {
+      background: linear-gradient(90deg, rgba(29,69,131,1) 0%, rgba(46,132,60,1) 100%);
     }
   </style>
 </head>
-<body class="hold-transition login-page $enable-gradients.aqua-gradient">
-<div class="login-box">
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <img class="img-fluid img-thumbnail" src="{{ secure_asset('images/logo-aefi.jpg') }}" alt="">
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">Crear cuenta</p>
+<body class="min-h-screen flex items-center justify-center">
+<div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+  <div class="text-center mb-4">
+    <img class="mx-auto h-30 w-100 object-cover" src="{{ secure_asset('images/logo-aefi.jpg') }}" alt="Logo">
+  </div>
+  <div>
+    <p class="text-center text-lg font-medium">Crear cuenta</p>
 
-      @include('_message')
+    @include('_message')
+    
+    <form method="POST" action="{{ route('register.user') }}" enctype="multipart/form-data" class="space-y-4">
+      {{ csrf_field() }}
+  
+      <div class="flex flex-col">
+          <label for="name" class="sr-only">Nombres</label>
+          <div class="relative">
+              <input type="text" id="name" name="name" required class="block w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Nombres">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <span class="fas fa-user"></span>
+              </div>
+          </div>
+      </div>
+  
+      <div class="flex flex-col">
+          <label for="last_name" class="sr-only">Apellidos</label>
+          <div class="relative">
+              <input type="text" id="last_name" name="last_name" required class="block w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Apellidos">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <span class="fas fa-user"></span>
+              </div>
+          </div>
+      </div>
+  
+      <div class="flex flex-col">
+          <label for="email" class="sr-only">Correo institucional</label>
+          <div class="relative">
+              <input type="email" id="email" name="email" required class="block w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Correo institucional">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <span class="fas fa-envelope"></span>
+              </div>
+          </div>
+      </div>
+  
+      <div class="flex flex-col">
+          <label for="password" class="sr-only">Contraseña</label>
+          <div class="relative">
+              <input type="password" id="password" name="password" required class="block w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Contraseña">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <span class="fas fa-lock"></span>
+              </div>
+          </div>
+      </div>
+
+      <div class="flex flex-col">
+          <label for="password_confirmation" class="sr-only">Confirmar Contraseña</label>
+          <div class="relative">
+              <input type="password" id="password_confirmation" name="password_confirmation" required class="block w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Confirmar Contraseña">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <span class="fas fa-lock"></span>
+              </div>
+          </div>
+      </div>
+  
+      <div class="flex flex-col">
+          <label for="user_photo" class="sr-only">Foto de perfil</label>
+          <div class="relative">
+              <input type="file" id="user_photo" name="user_photo" accept="image/*" class="block w-full px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                  <span class="fas fa-image"></span>
+              </div>
+          </div>
+      </div>
+  
+      <div class="flex justify-between items-center mt-4">
+          <button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Crear Cuenta</button>
+      </div>
       
-      <form method="POST" action="{{ route('register.user') }}" enctype="multipart/form-data">
-        {{ csrf_field() }}
-    
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" required name="name" placeholder="Nombres">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                </div>
-            </div>
-        </div>
-    
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" required name="last_name" placeholder="Apellidos">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                </div>
-            </div>
-        </div>
-    
-        <div class="input-group mb-3">
-            <input type="email" class="form-control" required name="email" placeholder="Correo institucional">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
-                </div>
-            </div>
-        </div>
-    
-        <div class="input-group mb-3">
-            <input type="password" class="form-control" required name="password" placeholder="Contraseña">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group mb-3">
-            <input type="password" class="form-control" required name="password_confirmation" placeholder="Confirmar Contraseña">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                </div>
-            </div>
-        </div>
-    
-        <div class="input-group mb-3">
-            <input type="file" class="form-control" name="user_photo" accept="image/*" placeholder="Foto de perfil">
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-image"></span>
-                </div>
-            </div>
-        </div>
-    
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Crear Cuenta</button>
-            </div>
-        </div>
-        
-        <div class="row pt-2">
-            <p class="col-12">
-                ¿Ya tienes una cuenta? <a href="{{ url('')}}">Inicia sesión</a>
-            </p>
-        </div>
+      <div class="text-center mt-4">
+          <p class="text-sm">
+              ¿Ya tienes una cuenta? <a href="{{ url('login') }}" class="text-indigo-600 hover:text-indigo-500">Inicia sesión</a>
+          </p>
+      </div>
     </form>
+  </div>
 </div>
 
 <!-- jQuery -->
 <script src="{{ secure_asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ secure_asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ secure_asset('dist/js/adminlte.min.js') }}"></script>
+<!-- Font Awesome (for icons) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -27,6 +27,7 @@
       scrollbar-color: #007bff #f1f1f1;
     }
   </style>
+    @vite('resources/css/app.css')
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
